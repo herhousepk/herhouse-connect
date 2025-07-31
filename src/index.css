@@ -1,42 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* HerHouse Pink Theme Colors */
+    --primary: 340 65% 47%;        /* Deep pink */
+    --primary-foreground: 0 0% 98%; /* White text */
+    --primary-variant: 340 50% 60%; /* Lighter pink */
+    
+    --secondary: 320 30% 94%;       /* Light pink background */
+    --secondary-foreground: 340 85% 25%; /* Dark pink text */
+    
+    --accent: 350 70% 85%;          /* Soft pink accent */
+    --accent-foreground: 340 90% 20%; /* Dark text on accent */
+    
+    --background: 0 0% 100%;        /* Pure white */
+    --foreground: 222.2 84% 4.9%;   /* Almost black text */
+    
+    --card: 0 0% 100%;              /* White cards */
+    --card-foreground: 222.2 84% 4.9%; /* Dark text on cards */
+    
+    --popover: 0 0% 100%;           /* White popover */
+    --popover-foreground: 222.2 84% 4.9%; /* Dark text */
+    
+    --border: 340 20% 90%;          /* Light pink borders */
+    --input: 340 20% 90%;           /* Light pink input borders */
+    --ring: 340 65% 47%;            /* Pink focus ring */
+    
+    --muted: 320 20% 96%;           /* Very light pink muted */
+    --muted-foreground: 215.4 16.3% 46.9%; /* Gray text */
+    
+    --destructive: 0 84.2% 60.2%;   /* Red for errors */
+    --destructive-foreground: 210 40% 98%; /* White text on red */
+    
+    --success: 142 76% 36%;         /* Green for success */
+    --success-foreground: 0 0% 98%; /* White text on green */
+    
+    --warning: 38 92% 50%;          /* Orange for warnings */
+    --warning-foreground: 0 0% 98%; /* White text on orange */
+    
+    --radius: 0.75rem;              /* Rounded corners */
+    
+    /* HerHouse Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-variant)));
+    --gradient-hero: linear-gradient(135deg, hsl(340 65% 47%), hsl(320 60% 55%), hsl(300 50% 60%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--secondary)));
+    
+    /* Shadows with brand colors */
+    --shadow-soft: 0 4px 6px -1px hsl(var(--primary) / 0.1);
+    --shadow-medium: 0 10px 15px -3px hsl(var(--primary) / 0.1);
+    --shadow-large: 0 25px 50px -12px hsl(var(--primary) / 0.15);
+    
+    /* Animation timings */
+    --transition-fast: 0.15s ease-out;
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s ease-in-out;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -98,8 +120,62 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
+  
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+  
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .shadow-large {
+    box-shadow: var(--shadow-large);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+}
+
+@layer components {
+  .her-card {
+    @apply bg-card text-card-foreground rounded-lg border shadow-soft;
+  }
+  
+  .her-gradient {
+    background: var(--gradient-primary);
+  }
+  
+  .her-hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .her-button-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 
+           px-6 py-3 rounded-lg font-medium transition-smooth shadow-soft
+           hover:shadow-medium active:scale-[0.98];
+  }
+  
+  .her-button-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80
+           px-6 py-3 rounded-lg font-medium transition-smooth border border-border;
   }
 }
