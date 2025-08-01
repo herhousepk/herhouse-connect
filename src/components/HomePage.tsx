@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Star, Users, ShoppingBag, Gift, Crown, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
@@ -43,9 +44,11 @@ export default function HomePage() {
                 Start Your Store Today
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-4 text-lg">
-                Browse Products
-              </Button>
+              <Link to="/products">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-4 text-lg">
+                  Browse Products
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
